@@ -22,7 +22,7 @@ jobs:
           args: --template=page-template.html -t html --output=output/result.html Sample.md
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --pdf-engine=wkhtmltopdf --output=output/result2.pdf output/result.html
+          args: --output=output/result2.pdf output/result.html
       - uses: actions/upload-artifact@master
         with:
           name: output
