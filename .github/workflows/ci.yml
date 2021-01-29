@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: mkdir output
+      - run: |
+          mkdir output
+          cp page-template.css output/page-template.css
       - uses: docker://pandoc/latex:2.9
         with:
           args: --output=output/result.pdf Sample.md
