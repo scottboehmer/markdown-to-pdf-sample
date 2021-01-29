@@ -17,7 +17,7 @@ jobs:
           args: --output=output/result.pdf Sample.md
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --template=page-template.html -t=html --output=output/result.html Sample.md
+          args: --template=page-template.html -t html --output=output/result.html Sample.md
       - uses: actions/upload-artifact@master
         with:
           name: output
