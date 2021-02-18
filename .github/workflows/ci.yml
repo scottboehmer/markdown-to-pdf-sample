@@ -17,7 +17,7 @@ jobs:
           cp page-template.css ./work/page-template.css
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --template=page-template.html --metadata title="Sample" version=$GITHUB_RUN_NUMBER -t html --output=./work/result.html Sample.md
+          args: --template=page-template.html --metadata title="Sample" --metadata version=$GITHUB_RUN_NUMBER -t html --output=./work/result.html Sample.md
       - run: |
           npx html5-to-pdf --print-background --page-size A5 -o ./output/result.pdf --template-path ./work/ --include ./work/page-template.css ./work/result.html
       - uses: actions/upload-artifact@master
