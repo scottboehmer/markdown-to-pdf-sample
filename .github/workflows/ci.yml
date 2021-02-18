@@ -19,7 +19,6 @@ jobs:
         with:
           args: --template=page-template.html -t html --output=./work/result.html Sample.md
       - run: |
-          sudo npm install html5-to-pdf
           npx html5-to-pdf --print-background --page-size A5 -o ./output/result.pdf --template-path ./work/ --include ./work/page-template.css ./work/result.html
       - uses: actions/upload-artifact@master
         with:
