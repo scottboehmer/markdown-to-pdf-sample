@@ -13,13 +13,13 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           mkdir output
-          cp page-template.css output/page-template.css
+          cp page-template.css ./output/page-template.css
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --template=page-template.html -t html --output=output/result.html Sample.md
+          args: --template=page-template.html -t html --output=./output/result.html Sample.md
       - run: |
           sudo npm install html5-to-pdf
-          npx html5-to-pdf --print-background --page-size A5 -o output/html5-to-pdf.pdf --template-path output/ output/result.html
+          npx html5-to-pdf --print-background --page-size A5 -o ./output/html5-to-pdf.pdf --template-path ./output/ --include ./output/page-template.css ./output/result.html
       - uses: actions/upload-artifact@master
         with:
           name: output
