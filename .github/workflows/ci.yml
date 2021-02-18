@@ -13,10 +13,13 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           mkdir output
-          echo "::set-env name=FILELIST::Sample.md"
+          mkdir work
+          cp page-template.css ./work/page-template.css
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --output=output/result.pdf ${{ env.FILELIST }}
+          args: --template=page-template.html -t html --output=./work/result.html Sample.md
+      - run: |
+          npx html5-to-pdf --print-background --page-size A5 -o ./output/result.pdf --template-path ./work/ --include ./work/page-template.css ./work/result.html
       - uses: actions/upload-artifact@master
         with:
           name: output
