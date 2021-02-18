@@ -20,9 +20,8 @@ jobs:
       - uses: docker://pandoc/latex:2.9
         with:
           args: --template=page-template.html -t html --output=output/result.html Sample.md
-      - uses: docker://pandoc/latex:2.9
-        with:
-          args: --output=output/result2.pdf output/result.html
+      - run: |
+          npm install -g html5-to-pdf
       - uses: actions/upload-artifact@master
         with:
           name: output
