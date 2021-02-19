@@ -15,9 +15,11 @@ jobs:
           mkdir output
           mkdir work
           cp page-template.css ./work/page-template.css
+          cp page-template.html ./work/page-template.html
+          sed -i "s/INSERTVERSIONNUMBER/$GITHUB_RUN_NUMBER/g" ./work/page-template.html
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --template=page-template.html -t html --output=./work/result.html Sample.md
+          args: --template=./work/page-template.html --metadata title="Sample" -t html --output=./work/result.html Sample.md
       - run: |
           npx html5-to-pdf --print-background --page-size A5 -o ./output/result.pdf --template-path ./work/ --include ./work/page-template.css ./work/result.html
       - uses: actions/upload-artifact@master
