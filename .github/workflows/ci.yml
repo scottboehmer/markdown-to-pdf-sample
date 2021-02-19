@@ -12,6 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
+          echo $GITHUB_RUN_ID
+          echo $GITHUB_RUN_NUMBER
+          echo ${{env.GITHUB_RUN_ID}}
+          echo ${{env.GITHUB_RUN_NUMBER}}
+      - run: |
           mkdir output
           mkdir work
           cp page-template.css ./work/page-template.css
